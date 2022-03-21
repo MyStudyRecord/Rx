@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         //fromIterableOperator()
-        rangeOperator().subscribe({
+        repeatOperator().subscribe({
             Log.d(MainActivity.TAG, "onNext : $it")
         },{
             Log.d(MainActivity.TAG, "onError : $it")

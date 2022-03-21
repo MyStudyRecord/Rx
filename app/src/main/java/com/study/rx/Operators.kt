@@ -86,3 +86,7 @@ fun fromIterableOperator(){
 fun rangeOperator() : Observable<Int>{
     return Observable.range(1,1900)
 }
+
+fun repeatOperator() : Observable<Int>{
+    return Observable.range(1,10).repeat(2)
+}
