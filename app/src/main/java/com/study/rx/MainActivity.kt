@@ -12,20 +12,18 @@ class MainActivity : AppCompatActivity() {
         const val TAG = "MainActivity"
     }
 
+    val mList = mutableListOf(1,2,3,4,5,6,7,8,9,10,11,12)
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val observable = Observable.just(1, 2,3,4,5)
+        val observable = Observable.just(mList)
 
-        val observer = object : Observer<Int> {
+        val observer = object : Observer<List<Int>> {
             override fun onSubscribe(d: Disposable) {
                 Log.d(TAG, "onSubscribe")
-            }
-
-            override fun onNext(t: Int) {
-                Log.d(TAG, "onNext : $t")
             }
 
             override fun onError(e: Throwable) {
@@ -34,6 +32,10 @@ class MainActivity : AppCompatActivity() {
 
             override fun onComplete() {
                 Log.d(TAG, "onComplete")
+            }
+
+            override fun onNext(t: List<Int>) {
+                Log.d(TAG, "onNext : $t")
             }
 
         }
