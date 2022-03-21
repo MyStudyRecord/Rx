@@ -19,12 +19,24 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         //fromIterableOperator()
-        repeatOperator().subscribe({
+ /*       repeatOperator().subscribe({
             Log.d(MainActivity.TAG, "onNext : $it")
         },{
             Log.d(MainActivity.TAG, "onError : $it")
         },{
             Log.d(MainActivity.TAG, "onComplete")
+        })*/
+        intervalOperator().subscribe({
+            Log.d(MainActivity.TAG, "onNext : $it")
+            getLocation()
+        },{
+            Log.d(MainActivity.TAG, "onError : $it")
+        },{
+            Log.d(MainActivity.TAG, "onComplete")
         })
+    }
+
+    private fun getLocation(){
+        Log.d(TAG, "Latitude : 102.0303 Longitude : 1.2355")
     }
 }
