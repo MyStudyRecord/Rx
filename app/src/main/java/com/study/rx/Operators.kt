@@ -97,3 +97,7 @@ fun intervalOperator() : Observable<Long>{
         value <= 10
     }
 }
+
+fun timerOperator() : Observable<Long>{
+    return Observable.timer(5, TimeUnit.SECONDS)
+}

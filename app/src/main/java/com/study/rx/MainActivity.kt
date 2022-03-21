@@ -26,7 +26,16 @@ class MainActivity : AppCompatActivity() {
         },{
             Log.d(MainActivity.TAG, "onComplete")
         })*/
-        intervalOperator().subscribe({
+    /*    intervalOperator().subscribe({
+            Log.d(MainActivity.TAG, "onNext : $it")
+            getLocation()
+        },{
+            Log.d(MainActivity.TAG, "onError : $it")
+        },{
+            Log.d(MainActivity.TAG, "onComplete")
+        })*/
+
+        timerOperator().subscribe({
             Log.d(MainActivity.TAG, "onNext : $it")
             getLocation()
         },{
