@@ -2,6 +2,7 @@ package com.study.rx
 
 import android.util.Log
 import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.core.ObservableOnSubscribe
 import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.disposables.Disposable
 import java.util.*
@@ -100,4 +101,19 @@ fun intervalOperator() : Observable<Long>{
 
 fun timerOperator() : Observable<Long>{
     return Observable.timer(5, TimeUnit.SECONDS)
+}
+
+fun createOperator() : Observable<Int>{
+    return Observable.create(ObservableOnSubscribe<Int> {
+        try {
+            for(i in mListNum){
+                it.onNext(i * 5)
+            }
+
+            it.onComplete()
+
+        }catch (e : Exception){
+            it.onError(e)
+        }
+    })
 }

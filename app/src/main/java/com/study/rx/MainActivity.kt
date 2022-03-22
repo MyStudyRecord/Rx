@@ -35,9 +35,8 @@ class MainActivity : AppCompatActivity() {
             Log.d(MainActivity.TAG, "onComplete")
         })*/
 
-        timerOperator().subscribe({
+        createOperator().subscribe({
             Log.d(MainActivity.TAG, "onNext : $it")
-            getLocation()
         },{
             Log.d(MainActivity.TAG, "onError : $it")
         },{
