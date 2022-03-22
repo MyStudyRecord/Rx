@@ -35,13 +35,25 @@ class MainActivity : AppCompatActivity() {
             Log.d(MainActivity.TAG, "onComplete")
         })*/
 
-        createOperator().subscribe({
+  /*      createOperator().subscribe({
             Log.d(MainActivity.TAG, "onNext : $it")
         },{
             Log.d(MainActivity.TAG, "onError : $it")
         },{
             Log.d(MainActivity.TAG, "onComplete")
-        })
+        })*/
+
+        filterOperator()
+            .filter{
+                it.name=="demo2"
+            }
+            .subscribe({
+                Log.d(MainActivity.TAG, "onNext : $it")
+            },{
+                Log.d(MainActivity.TAG, "onError : $it")
+            },{
+                Log.d(MainActivity.TAG, "onComplete")
+            })
     }
 
     private fun getLocation(){

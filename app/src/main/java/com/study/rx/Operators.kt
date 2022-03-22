@@ -1,6 +1,7 @@
 package com.study.rx
 
 import android.util.Log
+import com.study.rx.data.User
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.ObservableOnSubscribe
 import io.reactivex.rxjava3.core.Observer
@@ -11,6 +12,14 @@ import java.util.concurrent.TimeUnit
 val mListNum = mutableListOf(1,2,3,4,5,6,7,8,9,10,11,12)
 val arraysNum1 = arrayOf(1,2,3,4,5,6,7,8,9,10,11,12)
 val arraysNum2 = arrayOf(10,20,30,40,50,60,70,80,90,100,110,120)
+val mUserList = mutableListOf<User>(
+    User(1,"demo1",15),
+    User(2,"demo2",10),
+    User(3,"demo3",35),
+    User(4,"demo4",29),
+    User(5,"demo5",12)
+)
+
 
 fun justOperator(){
     val observable = Observable.just(mListNum)
@@ -116,4 +125,8 @@ fun createOperator() : Observable<Int>{
             it.onError(e)
         }
     })
+}
+
+fun filterOperator() : Observable<User>{
+    return Observable.fromIterable(mUserList)
 }
