@@ -20,8 +20,9 @@ val mUserList = mutableListOf<User>(
     User(5, "demo5", 12),
     User(6, "demo6", 29),
     User(7, "demo7", 29),
+    User(7, "demo7", 29),
     User(8, "demo8", 15),
-    User(9, "demo9", 19),
+    User(8, "demo8", 15)
     )
 
 
@@ -140,5 +141,9 @@ fun lastOperator(): Observable<User> {
 }
 
 fun distinctOperator(): Observable<User> {
+    return Observable.fromIterable(mUserList)
+}
+
+fun skipOperator(): Observable<User> {
     return Observable.fromIterable(mUserList)
 }

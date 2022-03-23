@@ -7,6 +7,7 @@ import com.study.rx.data.User
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.disposables.Disposable
+import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
     companion object {
@@ -61,11 +62,27 @@ class MainActivity : AppCompatActivity() {
             },{
                 Log.d(MainActivity.TAG, "onError : $it")
             })*/
-        distinctOperator()
-           /* .distinct{
+ /*       distinctOperator()
+           *//* .distinct{
                 it.age
-            }*/
+            }*//*
             .distinct()
+            .subscribe({
+                Log.d(MainActivity.TAG, "onNext : $it")
+            },{
+                Log.d(MainActivity.TAG, "onError : $it")
+            },{
+                Log.d(MainActivity.TAG, "onComplete")
+            })*/
+        skipOperator()
+            //앞에서 2개 뛰고
+            //.skip(2)
+            //뒤에서 2개 뛰고
+//            .skipLast(2)
+            //distinct 나 skipLast 순서에 따라 값이 달라짐
+            //distinct()
+                //시간으로 스킵가능
+            //.skip(1, TimeUnit.MILLISECONDS)
             .subscribe({
                 Log.d(MainActivity.TAG, "onNext : $it")
             },{
