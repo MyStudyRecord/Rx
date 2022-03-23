@@ -9,19 +9,23 @@ import io.reactivex.rxjava3.disposables.Disposable
 import java.util.*
 import java.util.concurrent.TimeUnit
 
-val mListNum = mutableListOf(1,2,3,4,5,6,7,8,9,10,11,12)
-val arraysNum1 = arrayOf(1,2,3,4,5,6,7,8,9,10,11,12)
-val arraysNum2 = arrayOf(10,20,30,40,50,60,70,80,90,100,110,120)
+val mListNum = mutableListOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
+val arraysNum1 = arrayOf(1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12)
+val arraysNum2 = arrayOf(10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 110, 120)
 val mUserList = mutableListOf<User>(
-    User(1,"demo1",15),
-    User(2,"demo2",10),
-    User(3,"demo3",35),
-    User(4,"demo4",29),
-    User(5,"demo5",12)
-)
+    User(1, "demo1", 15),
+    User(2, "demo2", 10),
+    User(3, "demo3", 35),
+    User(4, "demo4", 29),
+    User(5, "demo5", 12),
+    User(6, "demo6", 29),
+    User(7, "demo7", 29),
+    User(8, "demo8", 15),
+    User(9, "demo9", 19),
+    )
 
 
-fun justOperator(){
+fun justOperator() {
     val observable = Observable.just(mListNum)
 
     val observer = object : Observer<List<Int>> {
@@ -46,7 +50,7 @@ fun justOperator(){
     observable.subscribe(observer)
 }
 
-fun fromOperator(){
+fun fromOperator() {
     val observable = Observable.fromArray(arraysNum1)
 
     val observer = object : Observer<Array<Int>> {
@@ -70,7 +74,7 @@ fun fromOperator(){
     observable.subscribe(observer)
 }
 
-fun fromIterableOperator(){
+fun fromIterableOperator() {
     val observable = Observable.fromIterable(mListNum)
 
     val observer = object : Observer<Int> {
@@ -94,43 +98,47 @@ fun fromIterableOperator(){
     observable.subscribe(observer)
 }
 
-fun rangeOperator() : Observable<Int>{
-    return Observable.range(1,1900)
+fun rangeOperator(): Observable<Int> {
+    return Observable.range(1, 1900)
 }
 
-fun repeatOperator() : Observable<Int>{
-    return Observable.range(1,10).repeat(2)
+fun repeatOperator(): Observable<Int> {
+    return Observable.range(1, 10).repeat(2)
 }
 
-fun intervalOperator() : Observable<Long>{
-    return Observable.interval(1,TimeUnit.SECONDS).takeWhile{ value ->
+fun intervalOperator(): Observable<Long> {
+    return Observable.interval(1, TimeUnit.SECONDS).takeWhile { value ->
         value <= 10
     }
 }
 
-fun timerOperator() : Observable<Long>{
+fun timerOperator(): Observable<Long> {
     return Observable.timer(5, TimeUnit.SECONDS)
 }
 
-fun createOperator() : Observable<Int>{
+fun createOperator(): Observable<Int> {
     return Observable.create(ObservableOnSubscribe<Int> {
         try {
-            for(i in mListNum){
+            for (i in mListNum) {
                 it.onNext(i * 5)
             }
 
             it.onComplete()
 
-        }catch (e : Exception){
+        } catch (e: Exception) {
             it.onError(e)
         }
     })
 }
 
-fun filterOperator() : Observable<User>{
+fun filterOperator(): Observable<User> {
     return Observable.fromIterable(mUserList)
 }
 
-fun lastOperator() : Observable<User>{
+fun lastOperator(): Observable<User> {
+    return Observable.fromIterable(mUserList)
+}
+
+fun distinctOperator(): Observable<User> {
     return Observable.fromIterable(mUserList)
 }

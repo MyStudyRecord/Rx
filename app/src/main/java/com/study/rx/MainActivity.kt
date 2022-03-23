@@ -54,12 +54,24 @@ class MainActivity : AppCompatActivity() {
             },{
                 Log.d(MainActivity.TAG, "onComplete")
             })*/
-        lastOperator()
+/*        lastOperator()
             .last( User(1,"demo1",15))
             .subscribe({
                 Log.d(MainActivity.TAG, "onNext : $it")
             },{
                 Log.d(MainActivity.TAG, "onError : $it")
+            })*/
+        distinctOperator()
+           /* .distinct{
+                it.age
+            }*/
+            .distinct()
+            .subscribe({
+                Log.d(MainActivity.TAG, "onNext : $it")
+            },{
+                Log.d(MainActivity.TAG, "onError : $it")
+            },{
+                Log.d(MainActivity.TAG, "onComplete")
             })
     }
 
