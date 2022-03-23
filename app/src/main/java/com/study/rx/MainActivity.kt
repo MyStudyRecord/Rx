@@ -16,35 +16,34 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         //fromIterableOperator()
- /*       repeatOperator().subscribe({
-            Log.d(MainActivity.TAG, "onNext : $it")
-        },{
-            Log.d(MainActivity.TAG, "onError : $it")
-        },{
-            Log.d(MainActivity.TAG, "onComplete")
-        })*/
-    /*    intervalOperator().subscribe({
-            Log.d(MainActivity.TAG, "onNext : $it")
-            getLocation()
-        },{
-            Log.d(MainActivity.TAG, "onError : $it")
-        },{
-            Log.d(MainActivity.TAG, "onComplete")
-        })*/
+        /*       repeatOperator().subscribe({
+                   Log.d(MainActivity.TAG, "onNext : $it")
+               },{
+                   Log.d(MainActivity.TAG, "onError : $it")
+               },{
+                   Log.d(MainActivity.TAG, "onComplete")
+               })*/
+        /*    intervalOperator().subscribe({
+                Log.d(MainActivity.TAG, "onNext : $it")
+                getLocation()
+            },{
+                Log.d(MainActivity.TAG, "onError : $it")
+            },{
+                Log.d(MainActivity.TAG, "onComplete")
+            })*/
 
-  /*      createOperator().subscribe({
-            Log.d(MainActivity.TAG, "onNext : $it")
-        },{
-            Log.d(MainActivity.TAG, "onError : $it")
-        },{
-            Log.d(MainActivity.TAG, "onComplete")
-        })*/
+        /*      createOperator().subscribe({
+                  Log.d(MainActivity.TAG, "onNext : $it")
+              },{
+                  Log.d(MainActivity.TAG, "onError : $it")
+              },{
+                  Log.d(MainActivity.TAG, "onComplete")
+              })*/
 /*        filterOperator()
             .filter{
                 it.name=="demo2"
@@ -63,8 +62,8 @@ class MainActivity : AppCompatActivity() {
             },{
                 Log.d(MainActivity.TAG, "onError : $it")
             })*/
- /*       distinctOperator()
-           *//* .distinct{
+        /*       distinctOperator()
+                  *//* .distinct{
                 it.age
             }*//*
             .distinct()
@@ -102,10 +101,10 @@ class MainActivity : AppCompatActivity() {
                 Log.d(MainActivity.TAG, "onComplete")
             })*/
 
-        mapOperator()
-            /*.map {
+        /*      mapOperator()
+                  *//*.map {
                 it.age * 2
-            }*/
+            }*//*
             .map {
                 UserProfile(it.id, it.name, it.age, "https://test.com/${it.id}")
             }
@@ -115,10 +114,37 @@ class MainActivity : AppCompatActivity() {
                 Log.d(MainActivity.TAG, "onError : $it")
             },{
                 Log.d(MainActivity.TAG, "onComplete")
+            })*/
+
+        flatMapOperator()
+            .flatMap {
+                getUserProfile(it.id)
+            }
+            .subscribe({
+                Log.d(MainActivity.TAG, "onNext : $it")
+            }, {
+                Log.d(MainActivity.TAG, "onError : $it")
+            }, {
+                Log.d(MainActivity.TAG, "onComplete")
+            })
+
+        flatMapOperatorTow()
+            .flatMap {
+                Observable.fromIterable(it)
+            }
+            .flatMap {
+                getUserProfile(it.id)
+            }
+            .subscribe({
+                Log.d(MainActivity.TAG, "onNext : $it")
+            }, {
+                Log.d(MainActivity.TAG, "onError : $it")
+            }, {
+                Log.d(MainActivity.TAG, "onComplete")
             })
     }
 
-    private fun getLocation(){
+    private fun getLocation() {
         Log.d(TAG, "Latitude : 102.0303 Longitude : 1.2355")
     }
 }

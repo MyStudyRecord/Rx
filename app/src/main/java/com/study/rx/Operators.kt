@@ -2,6 +2,7 @@ package com.study.rx
 
 import android.util.Log
 import com.study.rx.data.User
+import com.study.rx.data.UserProfile
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.ObservableOnSubscribe
 import io.reactivex.rxjava3.core.Observer
@@ -24,6 +25,19 @@ val mUserList = mutableListOf<User>(
     User(8, "demo8", 15),
     User(8, "demo8", 15)
     )
+
+val mUserProfileList = mutableListOf<UserProfile>(
+    UserProfile(1, "demo1", 15, "aa"),
+    UserProfile(2, "demo2", 10, "aa"),
+    UserProfile(3, "demo3", 35, "aa"),
+    UserProfile(4, "demo4", 29, "aa"),
+    UserProfile(5, "demo5", 12, "aa"),
+    UserProfile(6, "demo6", 29, "aa"),
+    UserProfile(7, "demo7", 29, "aa"),
+    UserProfile(7, "demo7", 29, "aa"),
+    UserProfile(8, "demo8", 15, "aa"),
+    UserProfile(8, "demo8", 15, "aa")
+)
 
 
 fun justOperator() {
@@ -154,4 +168,19 @@ fun bufferOperator(): Observable<User> {
 
 fun mapOperator(): Observable<User> {
     return Observable.fromIterable(mUserList)
+}
+
+fun flatMapOperator(): Observable<User> {
+    return Observable.fromIterable(mUserList)
+}
+
+fun getUserProfile(id : Long): Observable<UserProfile> {
+    return Observable.fromIterable(mUserProfileList)
+        .filter {
+            it.id == id
+        }
+}
+
+fun flatMapOperatorTow(): Observable<List<User>> {
+    return Observable.just(mUserList)
 }
