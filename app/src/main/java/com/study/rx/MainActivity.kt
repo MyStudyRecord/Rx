@@ -3,6 +3,7 @@ package com.study.rx
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.study.rx.data.User
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.disposables.Disposable
@@ -42,8 +43,7 @@ class MainActivity : AppCompatActivity() {
         },{
             Log.d(MainActivity.TAG, "onComplete")
         })*/
-
-        filterOperator()
+/*        filterOperator()
             .filter{
                 it.name=="demo2"
             }
@@ -53,6 +53,13 @@ class MainActivity : AppCompatActivity() {
                 Log.d(MainActivity.TAG, "onError : $it")
             },{
                 Log.d(MainActivity.TAG, "onComplete")
+            })*/
+        lastOperator()
+            .last( User(1,"demo1",15))
+            .subscribe({
+                Log.d(MainActivity.TAG, "onNext : $it")
+            },{
+                Log.d(MainActivity.TAG, "onError : $it")
             })
     }
 
