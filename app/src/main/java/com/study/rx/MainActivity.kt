@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import com.study.rx.data.User
+import com.study.rx.data.UserProfile
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.disposables.Disposable
@@ -100,6 +101,21 @@ class MainActivity : AppCompatActivity() {
             },{
                 Log.d(MainActivity.TAG, "onComplete")
             })*/
+
+        mapOperator()
+            /*.map {
+                it.age * 2
+            }*/
+            .map {
+                UserProfile(it.id, it.name, it.age, "https://test.com/${it.id}")
+            }
+            .subscribe({
+                Log.d(MainActivity.TAG, "onNext : $it")
+            },{
+                Log.d(MainActivity.TAG, "onError : $it")
+            },{
+                Log.d(MainActivity.TAG, "onComplete")
+            })
     }
 
     private fun getLocation(){
