@@ -74,7 +74,7 @@ class MainActivity : AppCompatActivity() {
             },{
                 Log.d(MainActivity.TAG, "onComplete")
             })*/
-        skipOperator()
+/*        skipOperator()
             //앞에서 2개 뛰고
             //.skip(2)
             //뒤에서 2개 뛰고
@@ -89,7 +89,17 @@ class MainActivity : AppCompatActivity() {
                 Log.d(MainActivity.TAG, "onError : $it")
             },{
                 Log.d(MainActivity.TAG, "onComplete")
-            })
+            })*/
+
+/*        bufferOperator()
+            .buffer(5)
+            .subscribe({
+                Log.d(MainActivity.TAG, "onNext : $it")
+            },{
+                Log.d(MainActivity.TAG, "onError : $it")
+            },{
+                Log.d(MainActivity.TAG, "onComplete")
+            })*/
     }
 
     private fun getLocation(){
