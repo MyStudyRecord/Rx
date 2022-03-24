@@ -202,3 +202,17 @@ fun getProfile() : Observable<UserProfile>{
 fun mergeOperator(): Observable<Any> {
     return Observable.merge(getUser(), getProfile())
 }
+
+fun getNum1To100(): Observable<Int>{
+    return Observable.range(1, 100)
+}
+
+fun getNum101To150(): Observable<Int>{
+    return Observable.range(101, 50)
+}
+
+fun concatOperator(): Observable<Int>{
+    //둘다 같음
+    //return Observable.concat(getNum1To100(), getNum101To150())
+    return getNum1To100().concatWith(getNum101To150())
+}
