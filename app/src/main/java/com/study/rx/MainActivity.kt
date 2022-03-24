@@ -200,9 +200,38 @@ class MainActivity : AppCompatActivity() {
                 Log.d(MainActivity.TAG, "onComplete")
             })*/
 
-        startWithOperator()
+/*        startWithOperator()
             .subscribe({
                 Log.d(MainActivity.TAG, "onNext : $it")
+            }, {
+                Log.d(MainActivity.TAG, "onError : $it")
+            }, {
+                Log.d(MainActivity.TAG, "onComplete")
+            })*/
+
+/*        zipOperator()
+            .subscribe({
+                Log.d(MainActivity.TAG, "onNext : $it")
+            }, {
+                Log.d(MainActivity.TAG, "onError : $it")
+            }, {
+                Log.d(MainActivity.TAG, "onComplete")
+            })*/
+
+/*        getBlogs()
+            .subscribe({
+                Log.d(MainActivity.TAG, "onNext : $it")
+            }, {
+                Log.d(MainActivity.TAG, "onError : $it")
+            }, {
+                Log.d(MainActivity.TAG, "onComplete")
+            })*/
+
+        zipOperator()
+            .subscribe({
+                it.forEach {
+                    Log.d(MainActivity.TAG, "onNext : $it")
+                }
             }, {
                 Log.d(MainActivity.TAG, "onError : $it")
             }, {

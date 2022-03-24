@@ -2,6 +2,8 @@ package com.study.rx
 
 import android.provider.ContactsContract
 import android.util.Log
+import com.study.rx.data.Blog
+import com.study.rx.data.BlogDetail
 import com.study.rx.data.User
 import com.study.rx.data.UserProfile
 import io.reactivex.rxjava3.core.Observable
@@ -9,6 +11,7 @@ import io.reactivex.rxjava3.core.ObservableOnSubscribe
 import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.functions.BiFunction
 import io.reactivex.rxjava3.internal.operators.observable.ObservableFromIterable
 import java.util.*
 import java.util.concurrent.TimeUnit
@@ -41,6 +44,16 @@ val mUserProfileList = mutableListOf<UserProfile>(
     UserProfile(8, "demo8", 15, "aa"),
     UserProfile(8, "demo8", 15, "aa")
 )
+
+val mBlogList = mutableListOf<Blog>(
+    Blog(1, 1,"title1","content1"),
+    Blog(2, 1,"title2","content2"),
+    Blog(3, 2,"title1","content1"),
+    Blog(4, 2,"title2","content2"),
+    Blog(5, 2,"title3","content3"),
+    Blog(6, 3,"title1","content1"),
+    Blog(7, 12,"title1","content1")
+    )
 
 
 fun justOperator() {
@@ -222,4 +235,45 @@ fun startWithOperator() : Observable<User>{
     //return getNum1To100().startWith(getNum101To150())
     //이렇게도 쓸수 있음
     return getUser().startWith(Single.just(User(0, "0", 0)))
+}
+
+fun getBlog() : Observable<Blog>{
+    return Observable.fromIterable(mBlogList)
+}
+
+fun getBlogs() : Observable<List<Blog>>{
+    return Observable.just(mBlogList)
+}
+
+fun getUsers() : Observable<List<User>>{
+    return Observable.just(mUserList)
+}
+
+fun zipOperator() : Observable<List<BlogDetail>>{
+/*    val num = Observable.just(1,2,3,4,5)
+    val char = Observable.just("A","B","C","D")
+
+    return Observable.zip(num, char, BiFunction{ t1, t2 ->
+        "$t1$t2"
+    })*/
+
+    return Observable.zip(getUsers(), getBlogs(), BiFunction { t1, t2 ->
+        blogDetail(t1, t2)
+    })
+}
+
+fun blogDetail(t1 : List<User>, t2 : List<Blog>) : List<BlogDetail>{
+    val listBlogDetail : MutableList<BlogDetail> = emptyList<BlogDetail>().toMutableList()
+    t1.forEach {user ->
+        t2.forEach { blog ->
+            if (blog.userId == user.id){
+                listBlogDetail.add(
+                    BlogDetail(
+                        blog.id, blog.userId, blog.title, blog.content, user
+                    )
+                )
+            }
+        }
+    }
+    return listBlogDetail
 }
