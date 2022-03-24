@@ -7,6 +7,7 @@ import com.study.rx.data.UserProfile
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.ObservableOnSubscribe
 import io.reactivex.rxjava3.core.Observer
+import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.internal.operators.observable.ObservableFromIterable
 import java.util.*
@@ -215,4 +216,10 @@ fun concatOperator(): Observable<Int>{
     //둘다 같음
     //return Observable.concat(getNum1To100(), getNum101To150())
     return getNum1To100().concatWith(getNum101To150())
+}
+
+fun startWithOperator() : Observable<User>{
+    //return getNum1To100().startWith(getNum101To150())
+    //이렇게도 쓸수 있음
+    return getUser().startWith(Single.just(User(0, "0", 0)))
 }

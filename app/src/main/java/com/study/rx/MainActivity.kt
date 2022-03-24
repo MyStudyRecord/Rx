@@ -191,7 +191,16 @@ class MainActivity : AppCompatActivity() {
                 Log.d(MainActivity.TAG, "onComplete")
             })*/
 
-        concatOperator()
+    /*    concatOperator()
+            .subscribe({
+                Log.d(MainActivity.TAG, "onNext : $it")
+            }, {
+                Log.d(MainActivity.TAG, "onError : $it")
+            }, {
+                Log.d(MainActivity.TAG, "onComplete")
+            })*/
+
+        startWithOperator()
             .subscribe({
                 Log.d(MainActivity.TAG, "onNext : $it")
             }, {
