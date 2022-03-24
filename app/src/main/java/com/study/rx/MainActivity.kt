@@ -155,16 +155,16 @@ class MainActivity : AppCompatActivity() {
                 Log.d(MainActivity.TAG, "onComplete")
             })*/
 
-        groupByOperator()
+   /*     groupByOperator()
             .groupBy {
                 it.age
             }
-    /*        .filter {
+    *//*        .filter {
                 it.key == 10
-            }*/
-   /*         .flatMapSingle {
+            }*//*
+   *//*         .flatMapSingle {
                 it.toList()
-            }*/
+            }*//*
             .subscribe({group ->
                 group.subscribe(
                     {
@@ -176,6 +176,15 @@ class MainActivity : AppCompatActivity() {
                     },
                 )
               Log.d(MainActivity.TAG, "onNext : $group")
+            }, {
+                Log.d(MainActivity.TAG, "onError : $it")
+            }, {
+                Log.d(MainActivity.TAG, "onComplete")
+            })*/
+
+        mergeOperator()
+            .subscribe({
+                Log.d(MainActivity.TAG, "onNext : $it")
             }, {
                 Log.d(MainActivity.TAG, "onError : $it")
             }, {

@@ -1,5 +1,6 @@
 package com.study.rx
 
+import android.provider.ContactsContract
 import android.util.Log
 import com.study.rx.data.User
 import com.study.rx.data.UserProfile
@@ -7,6 +8,7 @@ import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.ObservableOnSubscribe
 import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.internal.operators.observable.ObservableFromIterable
 import java.util.*
 import java.util.concurrent.TimeUnit
 
@@ -187,4 +189,16 @@ fun flatMapOperatorTow(): Observable<List<User>> {
 
 fun groupByOperator(): Observable<User> {
     return Observable.fromIterable(mUserList)
+}
+
+fun getUser() : Observable<User>{
+    return Observable.fromIterable(mUserList)
+}
+
+fun getProfile() : Observable<UserProfile>{
+    return Observable.fromIterable(mUserProfileList)
+}
+
+fun mergeOperator(): Observable<Any> {
+    return Observable.merge(getUser(), getProfile())
 }
