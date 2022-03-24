@@ -227,7 +227,7 @@ class MainActivity : AppCompatActivity() {
                 Log.d(MainActivity.TAG, "onComplete")
             })*/
 
-        zipOperator()
+/*        zipOperator()
             .subscribe({
                 it.forEach {
                     Log.d(MainActivity.TAG, "onNext : $it")
@@ -236,7 +236,9 @@ class MainActivity : AppCompatActivity() {
                 Log.d(MainActivity.TAG, "onError : $it")
             }, {
                 Log.d(MainActivity.TAG, "onComplete")
-            })
+            })*/
+
+        createObservable().subscribe(observer())
     }
 
     private fun getLocation() {
