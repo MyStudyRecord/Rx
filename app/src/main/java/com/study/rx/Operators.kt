@@ -184,3 +184,7 @@ fun getUserProfile(id : Long): Observable<UserProfile> {
 fun flatMapOperatorTow(): Observable<List<User>> {
     return Observable.just(mUserList)
 }
+
+fun groupByOperator(): Observable<User> {
+    return Observable.fromIterable(mUserList)
+}

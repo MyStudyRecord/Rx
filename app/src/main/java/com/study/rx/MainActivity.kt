@@ -116,7 +116,7 @@ class MainActivity : AppCompatActivity() {
                 Log.d(MainActivity.TAG, "onComplete")
             })*/
 
-        flatMapOperator()
+  /*      flatMapOperator()
             .flatMap {
                 getUserProfile(it.id)
             }
@@ -137,6 +137,45 @@ class MainActivity : AppCompatActivity() {
             }
             .subscribe({
                 Log.d(MainActivity.TAG, "onNext : $it")
+            }, {
+                Log.d(MainActivity.TAG, "onError : $it")
+            }, {
+                Log.d(MainActivity.TAG, "onComplete")
+            })*/
+
+/*        flatMapOperator()
+            .flatMap {
+                getUserProfile(it.id)
+            }
+            .subscribe({
+                Log.d(MainActivity.TAG, "onNext : $it")
+            }, {
+                Log.d(MainActivity.TAG, "onError : $it")
+            }, {
+                Log.d(MainActivity.TAG, "onComplete")
+            })*/
+
+        groupByOperator()
+            .groupBy {
+                it.age
+            }
+    /*        .filter {
+                it.key == 10
+            }*/
+   /*         .flatMapSingle {
+                it.toList()
+            }*/
+            .subscribe({group ->
+                group.subscribe(
+                    {
+                        Log.d(MainActivity.TAG, "key : ${group.key}, value : $it")
+
+                    },
+                    {
+
+                    },
+                )
+              Log.d(MainActivity.TAG, "onNext : $group")
             }, {
                 Log.d(MainActivity.TAG, "onError : $it")
             }, {
