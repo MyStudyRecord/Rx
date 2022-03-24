@@ -238,7 +238,9 @@ class MainActivity : AppCompatActivity() {
                 Log.d(MainActivity.TAG, "onComplete")
             })*/
 
-        createObservable().subscribe(observer())
+        //createObservable().subscribe(observer())
+        //createSingleObservable().subscribe(observerSingleObservable())
+        createMaybeObservable().subscribe(observerMaybeObservable())
     }
 
     private fun getLocation() {
