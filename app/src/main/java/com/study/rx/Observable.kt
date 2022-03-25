@@ -99,3 +99,38 @@ fun observerMaybeObservable() : MaybeObserver<List<User>> {
 
     }
 }
+
+fun createCompletableObservable() : Completable{
+    return Completable.create{ emitter ->
+        try {
+            if (!emitter.isDisposed){
+                getLocation()
+                emitter.onComplete()
+            }
+        }catch (e : Exception){
+            emitter.onError(e)
+        }
+    }
+}
+
+fun observeCompletableObservable(): CompletableObserver{
+    return object  : CompletableObserver{
+        override fun onSubscribe(d: Disposable) {
+            Log.d(TAG,"onSubscribe : $d")
+        }
+
+        override fun onComplete() {
+            Log.d(TAG,"onComplete")
+        }
+
+        override fun onError(e: Throwable) {
+            Log.d(TAG,"onError : $e")
+        }
+
+    }
+}
+
+private fun getLocation() {
+    //throw Exception("에러 ")
+    Log.d(TAG, "Latitude : 102.0303 Longitude : 1.2355")
+}

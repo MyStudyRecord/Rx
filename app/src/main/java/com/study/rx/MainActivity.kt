@@ -240,7 +240,8 @@ class MainActivity : AppCompatActivity() {
 
         //createObservable().subscribe(observer())
         //createSingleObservable().subscribe(observerSingleObservable())
-        createMaybeObservable().subscribe(observerMaybeObservable())
+        //createMaybeObservable().subscribe(observerMaybeObservable())
+        createCompletableObservable().subscribe(observeCompletableObservable())
     }
 
     private fun getLocation() {
