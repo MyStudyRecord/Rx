@@ -130,6 +130,11 @@ fun observeCompletableObservable(): CompletableObserver{
     }
 }
 
+fun createFlowableObservable() : Flowable<Int>{
+    return Flowable.range(1,10000)
+}
+
+
 private fun getLocation() {
     //throw Exception("에러 ")
     Log.d(TAG, "Latitude : 102.0303 Longitude : 1.2355")

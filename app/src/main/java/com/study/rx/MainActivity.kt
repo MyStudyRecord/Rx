@@ -7,7 +7,9 @@ import com.study.rx.data.User
 import com.study.rx.data.UserProfile
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Observer
+import io.reactivex.rxjava3.core.Scheduler
 import io.reactivex.rxjava3.disposables.Disposable
+import io.reactivex.rxjava3.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
 
 class MainActivity : AppCompatActivity() {
@@ -241,7 +243,20 @@ class MainActivity : AppCompatActivity() {
         //createObservable().subscribe(observer())
         //createSingleObservable().subscribe(observerSingleObservable())
         //createMaybeObservable().subscribe(observerMaybeObservable())
-        createCompletableObservable().subscribe(observeCompletableObservable())
+        //createCompletableObservable().subscribe(observeCompletableObservable())
+
+        createFlowableObservable()
+            .onBackpressureDrop()
+            .observeOn(Schedulers.io(), false, 10)
+            .subscribe(
+                {
+                    Log.d(MainActivity.TAG, "onNext : $it")
+                }, {
+                    Log.d(MainActivity.TAG, "onError : $it")
+                }, {
+                    Log.d(MainActivity.TAG, "onComplete")
+                }
+            )
     }
 
     private fun getLocation() {
