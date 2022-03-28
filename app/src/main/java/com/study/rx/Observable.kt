@@ -6,12 +6,13 @@ import com.study.rx.data.User
 import io.reactivex.rxjava3.core.*
 import io.reactivex.rxjava3.disposables.Disposable
 
+lateinit var disposable : Disposable
 
 fun createObservable() : Observable<Int> {
     return Observable.create{ emitter ->
         try {
             if (!emitter.isDisposed){
-                for (i in 0..100){
+                for (i in 0..1000000){
                     emitter.onNext(i)
                 }
                 emitter.onComplete()
@@ -25,6 +26,9 @@ fun createObservable() : Observable<Int> {
 fun observer() : Observer<Int>{
     return object : Observer<Int>{
         override fun onSubscribe(d: Disposable) {
+            d?.let {
+                disposable = d
+            }
             Log.d(TAG,"onSubscribe")
         }
 
@@ -139,3 +143,4 @@ private fun getLocation() {
     //throw Exception("에러 ")
     Log.d(TAG, "Latitude : 102.0303 Longitude : 1.2355")
 }
+

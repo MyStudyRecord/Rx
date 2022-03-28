@@ -8,6 +8,7 @@ import com.study.rx.data.UserProfile
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.core.Scheduler
+import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.disposables.Disposable
 import io.reactivex.rxjava3.schedulers.Schedulers
 import java.util.concurrent.TimeUnit
@@ -17,22 +18,24 @@ class MainActivity : AppCompatActivity() {
         const val TAG = "MainActivity"
     }
 
+    private val compositeDisposable = CompositeDisposable()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
         //fromIterableOperator()
-        /*       repeatOperator().subscribe({
+/*               repeatOperator().subscribe({
                    Log.d(MainActivity.TAG, "onNext : $it")
                },{
                    Log.d(MainActivity.TAG, "onError : $it")
                },{
                    Log.d(MainActivity.TAG, "onComplete")
                })*/
-        /*    intervalOperator().subscribe({
+  /*          intervalOperator().subscribe({
                 Log.d(MainActivity.TAG, "onNext : $it")
-                getLocation()
+               // getLocation()
             },{
                 Log.d(MainActivity.TAG, "onError : $it")
             },{
@@ -240,12 +243,25 @@ class MainActivity : AppCompatActivity() {
                 Log.d(MainActivity.TAG, "onComplete")
             })*/
 
-        //createObservable().subscribe(observer())
+        compositeDisposable.add(
+            createObservable()
+                .subscribeOn(Schedulers.io())
+                .subscribe(
+                    {
+                        Log.d(MainActivity.TAG, "onNext : $it")
+                    }, {
+                        Log.d(MainActivity.TAG, "onError : $it")
+                    }, {
+                        Log.d(MainActivity.TAG, "onComplete")
+                    }
+                )
+        )
+
         //createSingleObservable().subscribe(observerSingleObservable())
         //createMaybeObservable().subscribe(observerMaybeObservable())
         //createCompletableObservable().subscribe(observeCompletableObservable())
 
-        createFlowableObservable()
+/*        createFlowableObservable()
             .onBackpressureDrop()
             .observeOn(Schedulers.io(), false, 10)
             .subscribe(
@@ -256,10 +272,18 @@ class MainActivity : AppCompatActivity() {
                 }, {
                     Log.d(MainActivity.TAG, "onComplete")
                 }
-            )
+            )*/
+
     }
 
     private fun getLocation() {
         Log.d(TAG, "Latitude : 102.0303 Longitude : 1.2355")
+    }
+
+    override fun onDestroy() {
+        compositeDisposable.clear()
+        //disposable.dispose()
+        Log.d(TAG, "onDestroy")
+        super.onDestroy()
     }
 }
