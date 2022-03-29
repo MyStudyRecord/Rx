@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.util.Log
 import com.study.rx.data.User
 import com.study.rx.data.UserProfile
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.core.Observer
 import io.reactivex.rxjava3.core.Scheduler
@@ -243,12 +244,31 @@ class MainActivity : AppCompatActivity() {
                 Log.d(MainActivity.TAG, "onComplete")
             })*/
 
-        compositeDisposable.add(
+/*        compositeDisposable.add(
             createObservable()
                 .subscribeOn(Schedulers.io())
                 .subscribe(
                     {
                         Log.d(MainActivity.TAG, "onNext : $it")
+                    }, {
+                        Log.d(MainActivity.TAG, "onError : $it")
+                    }, {
+                        Log.d(MainActivity.TAG, "onComplete")
+                    }
+                )
+        )*/
+        compositeDisposable.add(
+            Observable.just(mUserList)
+                .flatMap {
+                    Log.d(MainActivity.TAG, "Upstream ThreadName : ${Thread.currentThread().name}")
+                    Observable.fromIterable(it)
+                }
+                    //만약 subscribeOn만 사용하면 observable를 위한 스레드에서 계속 실행됨
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    {
+                        Log.d(MainActivity.TAG, "onNext : $it, ThreadName : ${Thread.currentThread().name}")
                     }, {
                         Log.d(MainActivity.TAG, "onError : $it")
                     }, {
