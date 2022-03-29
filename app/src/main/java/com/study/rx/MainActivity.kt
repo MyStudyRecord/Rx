@@ -257,7 +257,8 @@ class MainActivity : AppCompatActivity() {
                     }
                 )
         )*/
-        compositeDisposable.add(
+
+/*        compositeDisposable.add(
             Observable.just(mUserList)
                 .flatMap {
                     Log.d(MainActivity.TAG, "Upstream ThreadName : ${Thread.currentThread().name}")
@@ -275,7 +276,7 @@ class MainActivity : AppCompatActivity() {
                         Log.d(MainActivity.TAG, "onComplete")
                     }
                 )
-        )
+        )*/
 
         //createSingleObservable().subscribe(observerSingleObservable())
         //createMaybeObservable().subscribe(observerMaybeObservable())
@@ -294,6 +295,11 @@ class MainActivity : AppCompatActivity() {
                 }
             )*/
 
+
+        coldObservable().subscribe(coldObserver())
+        Thread.sleep(2000)
+        coldObservable().subscribe(coldObserver())
+        Thread.sleep(2000)
     }
 
     private fun getLocation() {
