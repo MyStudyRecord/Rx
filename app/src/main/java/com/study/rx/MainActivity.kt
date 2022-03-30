@@ -296,10 +296,57 @@ class MainActivity : AppCompatActivity() {
             )*/
 
 
-        coldObservable().subscribe(coldObserver())
+/*        coldObservable().subscribe(coldObserver())
         Thread.sleep(2000)
         coldObservable().subscribe(coldObserver())
-        Thread.sleep(2000)
+        Thread.sleep(2000)*/
+
+/*        val hotObservable = hotObservable()
+        hotObservable.subscribe(
+            {
+                Log.d(MainActivity.TAG, "onNext : $it")
+            }, {
+                Log.d(MainActivity.TAG, "onError : $it")
+            }, {
+                Log.d(MainActivity.TAG, "onComplete")
+            }
+        )
+
+        hotObservable.connect()
+
+        hotObservable.subscribe(
+            {
+                Log.d(MainActivity.TAG, "onNext : $it")
+            }, {
+                Log.d(MainActivity.TAG, "onError : $it")
+            }, {
+                Log.d(MainActivity.TAG, "onComplete 2")
+            }
+        )*/
+
+
+        val hotObservable = hotObservableTwo()
+        hotObservable.connect()
+        hotObservable.subscribe(
+            {
+                Log.d(MainActivity.TAG, "onNext : $it")
+            }, {
+                Log.d(MainActivity.TAG, "onError : $it")
+            }, {
+                Log.d(MainActivity.TAG, "onComplete ")
+            }
+        )
+        Thread.sleep(5000)
+
+        hotObservable.subscribe(
+            {
+                Log.d(MainActivity.TAG, "onNext 2 : $it")
+            }, {
+                Log.d(MainActivity.TAG, "onError 2 : $it")
+            }, {
+                Log.d(MainActivity.TAG, "onComplete 2")
+            }
+        )
     }
 
     private fun getLocation() {
