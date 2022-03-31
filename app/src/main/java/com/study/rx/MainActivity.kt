@@ -350,7 +350,8 @@ class MainActivity : AppCompatActivity() {
 
         //asyncSubject()
         //asyncSubjectTwo()
-        behaviorSubjectTwo()
+        //behaviorSubjectTwo()
+        publishSubjectTwo()
     }
 
     private fun getLocation() {
