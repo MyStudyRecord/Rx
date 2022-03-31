@@ -3,6 +3,7 @@ package com.study.rx
 import android.util.Log
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.subjects.AsyncSubject
+import io.reactivex.rxjava3.subjects.BehaviorSubject
 import java.util.concurrent.TimeUnit
 
 fun asyncSubject(){
@@ -60,3 +61,58 @@ fun asyncSubjectTwo(){
     subject.onComplete()
 }
 
+fun behaviorSubject(){
+    val observable = Observable.interval(1, TimeUnit.SECONDS).takeWhile { it <= 5 }
+
+    val subject = BehaviorSubject.create<Long>()
+    observable.subscribe(subject)
+
+    subject.subscribe(
+        {
+            Log.d(MainActivity.TAG, "onNext1 : $it")
+        }, {
+            Log.d(MainActivity.TAG, "onError1 : $it")
+        }, {
+            Log.d(MainActivity.TAG, "onComplete1 ")
+        }
+    )
+
+    subject.subscribe(
+        {
+            Log.d(MainActivity.TAG, "onNext2 : $it")
+        }, {
+            Log.d(MainActivity.TAG, "onError2 : $it")
+        }, {
+            Log.d(MainActivity.TAG, "onComplete2 ")
+        }
+    )
+}
+
+fun behaviorSubjectTwo(){
+    val subject = BehaviorSubject.create<Int>()
+    subject.onNext(0)
+    subject.onNext(1)
+
+    //가장 마지막인줄 알고 1을 찍고 봤더니 뒤에 2가 하나 더있어서 1,2 둘다 찍힌다 이런건가?
+    subject.subscribe(
+        {
+            Log.d(MainActivity.TAG, "onNext1 : $it")
+        }, {
+            Log.d(MainActivity.TAG, "onError1 : $it")
+        }, {
+            Log.d(MainActivity.TAG, "onComplete1 ")
+        }
+    )
+    subject.onNext(2)
+
+
+    subject.subscribe(
+        {
+            Log.d(MainActivity.TAG, "onNext2 : $it")
+        }, {
+            Log.d(MainActivity.TAG, "onError2 : $it")
+        }, {
+            Log.d(MainActivity.TAG, "onComplete2 ")
+        }
+    )
+}
