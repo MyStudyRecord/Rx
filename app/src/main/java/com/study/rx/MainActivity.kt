@@ -325,7 +325,7 @@ class MainActivity : AppCompatActivity() {
         )*/
 
 
-        val hotObservable = hotObservableTwo()
+    /*    val hotObservable = hotObservableTwo()
         hotObservable.connect()
         hotObservable.subscribe(
             {
@@ -346,7 +346,10 @@ class MainActivity : AppCompatActivity() {
             }, {
                 Log.d(MainActivity.TAG, "onComplete 2")
             }
-        )
+        )*/
+
+        //asyncSubject()
+        asyncSubjectTwo()
     }
 
     private fun getLocation() {
