@@ -351,7 +351,8 @@ class MainActivity : AppCompatActivity() {
         //asyncSubject()
         //asyncSubjectTwo()
         //behaviorSubjectTwo()
-        publishSubjectTwo()
+        //publishSubjectTwo()
+        replaySubjectTwo()
     }
 
     private fun getLocation() {

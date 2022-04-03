@@ -8,6 +8,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import io.reactivex.rxjava3.subjects.AsyncSubject
 import io.reactivex.rxjava3.subjects.BehaviorSubject
 import io.reactivex.rxjava3.subjects.PublishSubject
+import io.reactivex.rxjava3.subjects.ReplaySubject
 import java.util.concurrent.TimeUnit
 
 fun asyncSubject(){
@@ -155,4 +156,72 @@ fun publishSubjectTwo(){
     )
     subject.onNext(2)
 
+}
+
+fun replaySubject(){
+    val observable=  Observable.interval(1, TimeUnit.SECONDS).takeWhile { it <= 5 }
+        .observeOn(Schedulers.io())
+        .observeOn(AndroidSchedulers.mainThread())
+
+    val subject = ReplaySubject.create<Long>()
+    observable.subscribe(subject)
+
+    subject.subscribe(
+        {
+            Log.d(MainActivity.TAG, "onNext1 : $it")
+        }, {
+            Log.d(MainActivity.TAG, "onError1 : $it")
+        }, {
+            Log.d(MainActivity.TAG, "onComplete1 ")
+        }
+    )
+    subject.subscribe(
+        {
+            Log.d(MainActivity.TAG, "onNext2 : $it")
+        }, {
+            Log.d(MainActivity.TAG, "onError2 : $it")
+        }, {
+            Log.d(MainActivity.TAG, "onComplete2 ")
+        }
+    )
+    subject.subscribe(
+        {
+            Log.d(MainActivity.TAG, "onNext3 : $it")
+        }, {
+            Log.d(MainActivity.TAG, "onError3 : $it")
+        }, {
+            Log.d(MainActivity.TAG, "onComplete3 ")
+        }
+    )
+}
+
+fun replaySubjectTwo(){
+    val subject = ReplaySubject.create<Int>()
+    subject.onNext(0)
+    subject.onNext(1)
+    subject.subscribe(
+        {
+            Log.d(MainActivity.TAG, "onNext1 : $it")
+        }, {
+            Log.d(MainActivity.TAG, "onError1 : $it")
+        }, {
+            Log.d(MainActivity.TAG, "onComplete1 ")
+        }
+    )
+
+    subject.onNext(2)
+    subject.onNext(3)
+    subject.subscribe(
+        {
+            Log.d(MainActivity.TAG, "onNext2 : $it")
+        }, {
+            Log.d(MainActivity.TAG, "onError2 : $it")
+        }, {
+            Log.d(MainActivity.TAG, "onComplete2 ")
+        }
+    )
+
+
+    subject.onNext(4)
+    subject.onNext(5)
 }
